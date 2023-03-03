@@ -8,7 +8,7 @@ bot = ChatGPT()
 chemical=input("Give the chemical Name: ")
 # return the full result
 bot.ask("give me only chemical reaction for the production of "+chemical+" in one line")
-bot.ask("convert above reaction into grams of chemicals and catalyst required to produce 1 kg of "+chemical+".")
+bot.ask("convert above reaction into kilo grams of chemicals and catalyst required to produce 1 kg of "+chemical+".")
 response=bot.ask("convert above visualisation into json file with columns: reactants formulae, reactant's chemical name and  grams required")
 print("*****************************************************************************************")
 print (response)
