@@ -9,7 +9,7 @@ chemical=input("Give the chemical Name: ")
 # return the full result
 bot.ask("give me only chemical reaction for the production of "+chemical+" in one line")
 bot.ask("convert above reaction into grams of chemicals and catalyst required to produce 1 kg of "+chemical+".")
-response=bot.ask("convert above visualisation into json file with columns: reactants, reactant's name and  grams required")
+response=bot.ask("convert above visualisation into json file with columns: reactants formulae, reactant's chemical name and  grams required")
 print("*****************************************************************************************")
 print (response)
 print("*****************************************************************************************")
@@ -23,8 +23,6 @@ mk2 = response.find('```', mk1)
 # fetched in between markers.
 subString = response[ mk1 : mk2 ]
 print(subString)
-
-
 
 # # return the result in streaming (chunks)
 #for chunk in bot.ask_stream("convert above visualisation into csv file"): 
