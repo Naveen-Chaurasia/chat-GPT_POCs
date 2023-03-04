@@ -1,0 +1,21 @@
+
+{
+    "reaction": "Phenol and formaldehyde undergo condensation polymerization in the presence of a catalyst to produce a thermosetting phenolic resin.",
+    "reactants": [
+        {
+            "formula": "C6H6O",
+            "name": "Phenol",
+            "grams": 1000
+        },
+        {
+            "formula": "CH2O",
+            "name": "Formaldehyde",
+            "grams": 1200
+        },
+        {
+            "formula": "Catalyst",
+            "name": "Catalyst",
+            "grams": 10
+        }
+    ]
+}

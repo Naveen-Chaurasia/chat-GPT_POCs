@@ -1,5 +1,6 @@
 
 # it will only run whre playwright is installed
+from flask import jsonify
 import json
 from chatgpt_wrapper import ChatGPT
 
@@ -13,25 +14,28 @@ response=bot.ask("convert above visualisation into json file with columns: react
 print("*****************************************************************************************")
 print (response)
 print("*****************************************************************************************")
-# find() method will search the 
-# given marker and stores its index 
 mk1 = response.find('```') +1
-# find() method will search the given 
-# marker and sotres its index
 mk2 = response.find('```', mk1)
-# using slicing substring will be 
-# fetched in between markers.
-subString = response[ mk1 : mk2 ] + "''"
+subString = "'"+response[ mk1 : mk2 ] + "'''"
 
-s=subString.replace("`","'")
+r=subString.replace("`","'")
+l=r.replace("json","")
+
+s=l.replace("'","")
+
+text_file = open("data.json", "w")
+text_file.write(s)
+text_file.close()
+
+
+print("--------------------------------------------------------------------------------------")
+f = open('data.json')
+data = json.load(f)
+print(type(data))
 print(s)
 print("*****************************************************************************************")
 print(type(s))
-t = json.loads(s)
+t =  json.loads(s)
 print("--------------------------------------------------------------------------------------")
 print(t)
 print(type(t))
-
-# # return the result in streaming (chunks)
-#for chunk in bot.ask_stream("convert above visualisation into csv file"): 
-#   print(chunk)
