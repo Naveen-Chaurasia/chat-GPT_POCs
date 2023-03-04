@@ -1,6 +1,6 @@
 
 # it will only run whre playwright is installed
-
+import json
 from chatgpt_wrapper import ChatGPT
 
 bot = ChatGPT()
@@ -23,6 +23,14 @@ mk2 = response.find('```', mk1)
 # fetched in between markers.
 subString = response[ mk1 : mk2 ]
 print(subString)
+print("*****************************************************************************************")
+print(type(subString))
+t = json.loads(subString)
+print("--------------------------------------------------------------------------------------")
+print(t)
+print(type(t))
+
+
 
 # # return the result in streaming (chunks)
 #for chunk in bot.ask_stream("convert above visualisation into csv file"): 
