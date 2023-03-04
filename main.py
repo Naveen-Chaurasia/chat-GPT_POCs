@@ -15,22 +15,22 @@ print (response)
 print("*****************************************************************************************")
 # find() method will search the 
 # given marker and stores its index 
-mk1 = response.find('```') + 3
+mk1 = response.find('```') +1
 # find() method will search the given 
 # marker and sotres its index
 mk2 = response.find('```', mk1)
 # using slicing substring will be 
 # fetched in between markers.
-subString = response[ mk1 : mk2 ]
-print(subString)
+subString = response[ mk1 : mk2 ] + "''"
+
+s=subString.replace("`","'")
+print(s)
 print("*****************************************************************************************")
-print(type(subString))
-t = json.loads(subString)
+print(type(s))
+t = json.loads(s)
 print("--------------------------------------------------------------------------------------")
 print(t)
 print(type(t))
-
-
 
 # # return the result in streaming (chunks)
 #for chunk in bot.ask_stream("convert above visualisation into csv file"): 
