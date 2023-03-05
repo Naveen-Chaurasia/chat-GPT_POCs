@@ -79,17 +79,14 @@ def readcsvfile():
     print(type(data))
 
     print(s)
-    print("*****************************************************************************************")
     print(type(s))
     t =  json.loads(s)
-   
     print(t)
     print(type(t))
     print (len(t['reactants']))
     print("--------------------------------------------------------------------------------------")
 
     gwp_sum=0
-    # print(t['reactants'][1]['name'])
     for i in range(0,len(t['reactants'])):
         print(t['reactants'][i]['name'])
         print(type(similarity_lcia(t['reactants'][i]['name'])).json) 
