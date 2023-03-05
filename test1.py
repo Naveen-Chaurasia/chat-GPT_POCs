@@ -1,5 +1,8 @@
-import json
 
+
+import json
+import jellyfish  
+import csv
 from flask import jsonify
 response='''H''ere's an example JSON file that represents the information you requested:
 
@@ -36,30 +39,36 @@ The catalyst information is represented in a separate object, which contains the
 
 Note that the values for "grams_required" are placeholders and would need to be updated with the correct values based on the specific reaction conditions and quantities.'''
 
+def similarity_lcia(chem):
+    with open("D:\Ardhi\Ecoinvent\cut-off-system-model\Cut-off Cumulative LCIA v3.9.csv", 'r') as file:
+       csvreader = csv.reader(file)
+       maxdis=0
+       max_sim_row=[]
+       for row in csvreader:
+           dis=jellyfish.jaro_distance(chem, str(row[3]))
+           if(dis>maxdis):
+            maxdis=dis
+            max_sim_row=row
+       return jsonify({'data': max_sim_row,'score':maxdis}) 
+
+
+
+
 mk1 = response.find('```') +1
 mk2 = response.find('```', mk1)
 subString = "'"+response[ mk1 : mk2 ] + "'''"
 
 r=subString.replace("`","'")
 l=r.replace("json","")
-
 s=l.replace("'","")
-#open text file
 text_file = open("data.json", "w")
-
-#write string to file
 text_file.write(s)
-
-#close file
 text_file.close()
 
 
 print("--------------------------------------------------------------------------------------")
 
 f = open('data.json')
-  
-# returns JSON object as 
-# a dictionary
 data = json.load(f)
   
 print(type(data))
@@ -71,3 +80,18 @@ t =  json.loads(s)
 print("--------------------------------------------------------------------------------------")
 print(t)
 print(type(t))
+print (len(t['reactants']))
+
+
+gwp_sum=0
+# print(t['reactants'][1]['name'])
+for i in range(0,len(t['reactants'])):
+   print(t['reactants'][i]['name'])
+
+   gwp_sum= gwp_sum + similarity_lcia(t['reactants'][i]['name'])['data'][7]
+
+
+print (gwp_sum)   
+   
+
+
