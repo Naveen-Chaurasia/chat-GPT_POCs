@@ -3,7 +3,13 @@
 import json
 import jellyfish  
 import csv
-from flask import jsonify
+from flask import jsonify,Flask
+
+
+
+app = Flask(__name__)
+
+
 response='''H''ere's an example JSON file that represents the information you requested:
 
 ```json
@@ -49,49 +55,60 @@ def similarity_lcia(chem):
            if(dis>maxdis):
             maxdis=dis
             max_sim_row=row
+       #print(type(jsonify({'data': max_sim_row,'score':maxdis})))     
        return jsonify({'data': max_sim_row,'score':maxdis}) 
 
 
+@app.route('/ab', methods = ['GET'])  
+def readcsvfile():
+
+    mk1 = response.find('```') +1
+    mk2 = response.find('```', mk1)
+    subString = "'"+response[ mk1 : mk2 ] + "'''"
+
+    r=subString.replace("`","'")
+    l=r.replace("json","")
+    s=l.replace("'","")
+    text_file = open("data.json", "w")
+    text_file.write(s)
+    text_file.close()
+
+    f = open('data.json')
+    data = json.load(f)
+    
+    print(type(data))
+
+    print(s)
+    print("*****************************************************************************************")
+    print(type(s))
+    t =  json.loads(s)
+   
+    print(t)
+    print(type(t))
+    print (len(t['reactants']))
+    print("--------------------------------------------------------------------------------------")
+
+    gwp_sum=0
+    # print(t['reactants'][1]['name'])
+    for i in range(0,len(t['reactants'])):
+        print(t['reactants'][i]['name'])
+        print(type(similarity_lcia(t['reactants'][i]['name'])).json) 
+        #  print(type((similarity_lcia(t['reactants'][i]['name'])).json())) 
+        #return similarity_lcia(t['reactants'][i]['name']).json['data']
+        m=similarity_lcia(t['reactants'][i]['name']).json['data']
+        print(m[7])
+        n=float(m[7])
+
+        gwp_sum= gwp_sum + n
 
 
-mk1 = response.find('```') +1
-mk2 = response.find('```', mk1)
-subString = "'"+response[ mk1 : mk2 ] + "'''"
+    print (gwp_sum)   
+    return str(gwp_sum)
 
-r=subString.replace("`","'")
-l=r.replace("json","")
-s=l.replace("'","")
-text_file = open("data.json", "w")
-text_file.write(s)
-text_file.close()
-
-
-print("--------------------------------------------------------------------------------------")
-
-f = open('data.json')
-data = json.load(f)
+# driver function
+if __name__ == '__main__':
   
-print(type(data))
-
-print(s)
-print("*****************************************************************************************")
-print(type(s))
-t =  json.loads(s)
-print("--------------------------------------------------------------------------------------")
-print(t)
-print(type(t))
-print (len(t['reactants']))
-
-
-gwp_sum=0
-# print(t['reactants'][1]['name'])
-for i in range(0,len(t['reactants'])):
-   print(t['reactants'][i]['name'])
-
-   gwp_sum= gwp_sum + similarity_lcia(t['reactants'][i]['name'])['data'][7]
-
-
-print (gwp_sum)   
+    app.run(debug = True)
    
 
 
