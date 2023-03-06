@@ -1,25 +1,22 @@
 
 {
-  "reactants": [
-    {
-      "formula": "C6H5OH",
-      "name": "Phenol",
-      "grams_required": 1000
-    },
-    {
-      "formula": "CH2O",
-      "name": "Formaldehyde",
-      "grams_required": 1300
-    },
-    {
-      "formula": "H2O",
-      "name": "Water",
-      "grams_required": 0
+  "reaction": {
+    "reactants": [
+      {
+        "formula": "SiO2",
+        "name": "Silicon dioxide",
+        "grams_required": 60.08
+      },
+      {
+        "formula": "H2O",
+        "name": "Water",
+        "grams_required": 36.04
+      }
+    ],
+    "product": {
+      "formula": "H4SiO4",
+      "name": "Silicic acid",
+      "grams_produced": 1000
     }
-  ],
-  "catalyst": {
-    "formula": "NaOH",
-    "name": "Sodium Hydroxide",
-    "grams_required": 20
   }
 }

@@ -4,9 +4,8 @@ from flask import jsonify,Flask
 import json
 from chatgpt_wrapper import ChatGPT
 import jellyfish
-
+import csv
 app = Flask(__name__)
-
 bot = ChatGPT()
 
 # chemical=input("Give the chemical Name: ")
