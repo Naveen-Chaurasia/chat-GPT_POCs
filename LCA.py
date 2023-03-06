@@ -19,3 +19,5 @@ mk1 = response.find('```') + 7
 mk2 = response.find('```', mk1)
 subString = response[ mk1 : mk2 ]
 print(subString)
+
+
