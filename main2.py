@@ -6,9 +6,7 @@ from chatgpt_wrapper import ChatGPT
 import jellyfish
 import csv
 app = Flask(__name__)
-bot = ChatGPT()
 
-# chemical=input("Give the chemical Name: ")
 
 def similarity_lcia(chem):
     with open("D:\Ardhi\Ecoinvent\cut-off-system-model\Cut-off Cumulative LCIA v3.9.csv", 'r') as file:
@@ -23,13 +21,23 @@ def similarity_lcia(chem):
        #print(type(jsonify({'data': max_sim_row,'score':maxdis})))     
        return jsonify({'data': max_sim_row,'score':maxdis}) 
 
-
-
-@app.route('/ab/<string:num>', methods = ['GET'])  
-def readcsvfile(chemical):
+def response_fun(chemical):
+    
+    bot = ChatGPT()
     bot.ask("give me only chemical reaction for the production of "+chemical+" in one line")
     bot.ask("convert above reaction into kilo grams of chemicals and catalyst required to produce 1 kg of "+chemical+".")
     response=bot.ask("convert above visualisation into json file with columns: reactants formulae, reactant's chemical name and  grams required")
+
+
+@app.route('/ab/<string:chemical>', methods = ['GET'])  
+def readcsvfile(chemical):
+
+
+    response=response_fun(chemical)
+    # bot = ChatGPT()
+    # bot.ask("give me only chemical reaction for the production of "+chemical+" in one line")
+    # bot.ask("convert above reaction into kilo grams of chemicals and catalyst required to produce 1 kg of "+chemical+".")
+    # response=bot.ask("convert above visualisation into json file with columns: reactants formulae, reactant's chemical name and  grams required")
 
     mk1 = response.find('```') +1
     mk2 = response.find('```', mk1)
