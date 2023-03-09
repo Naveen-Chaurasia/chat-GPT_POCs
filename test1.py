@@ -9,7 +9,6 @@ from flask import jsonify,Flask
 
 app = Flask(__name__)
 
-
 response='''H''ere's an example JSON file that represents the information you requested:
 
 ```json
