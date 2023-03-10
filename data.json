@@ -1,0 +1,15 @@
+
+{
+  "reactants": [
+    {
+      "formula": "SiO2",
+      "name": "Silicon dioxide",
+      "grams": 625.1
+    },
+    {
+      "formula": "H2O",
+      "name": "Water",
+      "grams": 374.7
+    }
+  ]
+}

@@ -25,11 +25,6 @@ def send_msg(msg,receiver_number):
 
   print("Status code: ", response.status_code)
 
-# response_Json = response.json()
-# print("Printing Post JSON data")
-# print(response_Json['data'])
-
-# print("Content-Type is ", response_Json['headers']['Content-Type'])
   print(response)
 
 @app.route('/receive_msg', methods=['POST','GET'])
